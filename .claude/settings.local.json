@@ -4,8 +4,10 @@
       "WebFetch(domain:github.com)",
       "Bash(ls:*)",
       "Bash(rm:*)",
-      "Bash(npm run:*)",
-      "Bash(mv:*)"
+      "Bash(pnpm run:*)",
+      "Bash(mv:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm add:*)"
     ],
     "deny": []
   }

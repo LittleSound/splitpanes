@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import Delete from 'rollup-plugin-delete'
+import dts from 'vite-plugin-dts'
 
 const bundleBuild = {
   lib: {
@@ -35,8 +36,15 @@ export default defineConfig({
           whitespace: 'preserve'
         }
       }
-    })
-  ], // https://vitejs.dev/config/
+    }),
+    // Only add dts plugin when building the bundle
+    ...(process.env.BUNDLE ? [dts({
+      insertTypesEntry: true,
+      entryRoot: 'src/components/splitpanes',
+      include: ['src/components/splitpanes/**/*', 'src/types/**/*'],
+      exclude: ['src/views/**/*', 'src/main.js', 'src/router.js', 'src/app.vue']
+    })] : [])
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, '/src')
