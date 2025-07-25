@@ -5,7 +5,7 @@ import Delete from 'rollup-plugin-delete'
 
 const bundleBuild = {
   lib: {
-    entry: resolve(__dirname, '/src/components/splitpanes/index.js'),
+    entry: resolve(__dirname, '/src/components/splitpanes/index.ts'),
     name: 'splitpanes',
     fileName: 'splitpanes',
     formats: ['es', 'umd', 'cjs']
