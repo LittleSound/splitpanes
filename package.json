@@ -38,7 +38,8 @@
     "build": "vite build --base /splitpanes/",
     "build-bundle": "BUNDLE=true vite build",
     "serve": "vite preview --base /splitpanes/",
-    "publish-doc": "npm run build && npm run build-bundle && git add . && git commit -m 'Publish documentation on Github.' && git push && git push --tag"
+    "publish-doc": "npm run build && npm run build-bundle && git add . && git commit -m 'Publish documentation on Github.' && git push && git push --tag",
+    "typecheck": "vue-tsc"
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
@@ -57,9 +58,11 @@
     "rollup-plugin-delete": "^3.0.1",
     "sass": "^1.89.0",
     "simple-syntax-highlighter": "^3.1.1",
+    "typescript": "^5.8.3",
     "vite": "^6.3.5",
     "vue": "^3.5.14",
     "vue-router": "^4.5.1",
+    "vue-tsc": "^3.0.4",
     "wave-ui": "^3.21.1"
   },
   "peerDependencies": {
