@@ -52,20 +52,20 @@ export interface PaneProps {
 }
 
 // Base event payload types
-interface BaseEventPayload {
+export interface BaseEventPayload {
   event?: MouseEvent | TouchEvent
 }
 
-interface EventWithIndex extends BaseEventPayload {
+export interface EventWithIndex extends BaseEventPayload {
   event: MouseEvent | TouchEvent
   index: number
 }
 
-interface EventWithPane extends EventWithIndex {
+export interface EventWithPane extends EventWithIndex {
   pane: PaneData
 }
 
-interface EventWithPanes extends BaseEventPayload {
+export interface EventWithPanes extends BaseEventPayload {
   index?: number
   prevPane?: Pick<PaneData, 'min' | 'max' | 'size'>
   nextPane?: Pick<PaneData, 'min' | 'max' | 'size'>
