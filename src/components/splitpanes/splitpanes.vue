@@ -1,19 +1,9 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, nextTick, provide, watch, withDefaults } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
-import type { PaneData, TouchState, SplitterTaps, DragPosition, PaneSums, PaneResizeVariables, SplitpanesProps } from '@/types'
+import type { PaneData, TouchState, SplitterTaps, DragPosition, PaneSums, PaneResizeVariables, SplitpanesProps, SplitpanesEmits } from '@/types'
 
-const emit = defineEmits<{
-  ready: []
-  resize: [{ event: Event }]
-  resized: [{ event?: Event; index?: number; panes: Omit<PaneData, 'id' | 'el' | 'index' | 'givenSize'>[] }]
-  'pane-click': [{ event: Event; index: number; pane: PaneData }]
-  'pane-maximize': [{ event: Event; index: number; pane: PaneData }]
-  'pane-add': [{ pane: PaneData }]
-  'pane-remove': [{ pane: PaneData }]
-  'splitter-click': [{ event: Event; index: number }]
-  'splitter-dblclick': [{ event: Event; index: number }]
-}>()
+const emit = defineEmits<SplitpanesEmits>()
 
 const props = withDefaults(defineProps<SplitpanesProps>(), {
   horizontal: false,
@@ -26,7 +16,7 @@ const props = withDefaults(defineProps<SplitpanesProps>(), {
 const panes: Ref<PaneData[]> = ref([])
 // Indexed panes by id (Vue's internal component uid) of Pane components for fast lookup.
 // Every time a pane is destroyed this index is recomputed.
-const indexedPanes: ComputedRef<Record<number, PaneData>> = computed(() => 
+const indexedPanes: ComputedRef<Record<number, PaneData>> = computed(() =>
   panes.value.reduce((obj, pane) => {
     obj[pane.id] = pane
     return obj
