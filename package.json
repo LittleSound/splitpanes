@@ -11,12 +11,15 @@
   "unpkg": "dist/splitpanes.umd.js",
   "jsdelivr": "dist/splitpanes.umd.js",
   "module": "./dist/splitpanes.es.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "src/components/splitpanes"
+    "src/components/splitpanes",
+    "src/types"
   ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/splitpanes.es.js",
       "require": "./dist/splitpanes.umd.js"
     },
@@ -39,7 +42,8 @@
     "build-bundle": "BUNDLE=true vite build",
     "serve": "vite preview --base /splitpanes/",
     "publish-doc": "npm run build && npm run build-bundle && git add . && git commit -m 'Publish documentation on Github.' && git push && git push --tag",
-    "typecheck": "vue-tsc"
+    "typecheck": "vue-tsc",
+    "prepublishOnly": "npm run typecheck && npm run build-bundle"
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
@@ -60,6 +64,7 @@
     "simple-syntax-highlighter": "^3.1.1",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4",
     "vue": "^3.5.14",
     "vue-router": "^4.5.1",
     "vue-tsc": "^3.0.4",

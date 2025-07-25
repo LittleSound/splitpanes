@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, ref, computed, onMounted, onBeforeUnmount, nextTick, provide, useSlots, watch, withDefaults } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick, provide, watch, withDefaults } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 import type { PaneData, TouchState, SplitterTaps, DragPosition, PaneSums, PaneResizeVariables, SplitpanesProps } from '@/types'
 
@@ -23,7 +23,6 @@ const props = withDefaults(defineProps<SplitpanesProps>(), {
   firstSplitter: false
 })
 
-const slots = useSlots()
 const panes: Ref<PaneData[]> = ref([])
 // Indexed panes by id (Vue's internal component uid) of Pane components for fast lookup.
 // Every time a pane is destroyed this index is recomputed.
@@ -681,14 +680,6 @@ onMounted(() => {
 // Prevent emitting console warnings on hot reloading.
 onBeforeUnmount(() => (ready.value = false))
 
-const render = () => {
-  return h(
-    'div',
-    { ref: containerEl, class: splitpanesClasses.value },
-    slots.default?.()
-  )
-}
-
 provide('panes', panes)
 provide('indexedPanes', indexedPanes)
 provide('horizontal', computed(() => props.horizontal))
@@ -699,7 +690,9 @@ provide('onPaneClick', onPaneClick)
 </script>
 
 <template>
-  <component :is="render"></component>
+  <div ref="containerEl" :class="splitpanesClasses">
+    <slot />
+  </div>
 </template>
 
 <style lang="scss">
