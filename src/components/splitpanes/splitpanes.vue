@@ -153,10 +153,13 @@ const onSplitterDblClick = (event, splitterIndex) => {
 }
 
 const onPaneClick = (event, paneId) => {
+  const pane = indexedPanes.value[paneId]
+  if (!pane) return // Prevent error when pane is removed during event bubbling
+
   emitEvent('pane-click', {
     event,
-    index: indexedPanes.value[paneId].index,
-    pane: indexedPanes.value[paneId]
+    index: pane.index,
+    pane
   })
 }
 
