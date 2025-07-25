@@ -1161,7 +1161,7 @@
 
 <script setup>
 import { computed, ref } from 'vue'
-import { Splitpanes, Pane } from '@/components/splitpanes/index.js'
+import { Splitpanes, Pane } from '@/components/splitpanes/index'
 import HighlightMessage from '@/components/highlight-message.vue'
 import SshPre from 'simple-syntax-highlighter'
 import 'simple-syntax-highlighter/dist/sshpre.css'

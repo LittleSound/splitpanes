@@ -51,14 +51,35 @@ export interface PaneProps {
   maxSize?: number | string
 }
 
+// Base event payload types
+interface BaseEventPayload {
+  event?: MouseEvent | TouchEvent
+}
+
+interface EventWithIndex extends BaseEventPayload {
+  event: MouseEvent | TouchEvent
+  index: number
+}
+
+interface EventWithPane extends EventWithIndex {
+  pane: PaneData
+}
+
+interface EventWithPanes extends BaseEventPayload {
+  index?: number
+  prevPane?: Pick<PaneData, 'min' | 'max' | 'size'>
+  nextPane?: Pick<PaneData, 'min' | 'max' | 'size'>
+  panes: Pick<PaneData, 'min' | 'max' | 'size'>[]
+}
+
 export interface SplitpanesEmits {
-  ready: []
-  resize: [{ event: Event }]
-  resized: [{ event?: Event; index?: number; panes: PaneData[] }]
-  'pane-click': [{ event: Event; index: number; pane: PaneData }]
-  'pane-maximize': [{ event: Event; index: number; pane: PaneData }]
+  ready: [EventWithPanes]
+  resize: [EventWithPanes]
+  resized: [EventWithPanes]
+  'pane-click': [EventWithPane]
+  'pane-maximize': [EventWithPane]
   'pane-add': [{ pane: PaneData }]
   'pane-remove': [{ pane: PaneData }]
-  'splitter-click': [{ event: Event; index: number }]
-  'splitter-dblclick': [{ event: Event; index: number }]
+  'splitter-click': [EventWithIndex]
+  'splitter-dblclick': [EventWithIndex]
 }
